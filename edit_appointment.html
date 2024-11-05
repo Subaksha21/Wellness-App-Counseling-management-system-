@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="edit-appointment-container">
+    <h2>Edit Appointment</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="date">Date:</label>
+        <input type="datetime-local" id="date" name="date" value="{{ appointment.date|date:'Y-m-d\\TH:i' }}" required>
+        
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Scheduled" {% if appointment.status == 'Scheduled' %}selected{% endif %}>Scheduled</option>
+            <option value="Completed" {% if appointment.status == 'Completed' %}selected{% endif %}>Completed</option>
+            <option value="Cancelled" {% if appointment.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+        </select>
+        
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+    
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

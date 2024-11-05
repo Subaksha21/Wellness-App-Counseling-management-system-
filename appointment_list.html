@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}My Appointments{% endblock %}
+
+{% block content %}
+<h2>My Appointments</h2>
+<ul class="list-group">
+    {% for appointment in appointments %}
+    <li class="list-group-item">
+        Appointment with {{ appointment.counselor.user.username }} on {{ appointment.date|date:"D, d M Y H:i" }} - {{ appointment.status }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
